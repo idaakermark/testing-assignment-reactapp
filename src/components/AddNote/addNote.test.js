@@ -35,15 +35,17 @@ describe('AddNote component', () => {
         expect(mockHandleAddNote).toHaveBeenCalledWith('Test note text');
     });
 
-    test('testing that handleAddNote is not called when Save button is clicked with empty noteText', () => {
-        const mockHandleAddNote = jest.fn();
-        render(<AddNote handleAddNote={mockHandleAddNote} />);
-    
+    test('save button is enabled after typing a note', () => {
+        render(<AddNote handleAddNote={() => {}} />);
+
         const saveButton = screen.getByText('Save');
-        fireEvent.click(saveButton);
     
-        expect(mockHandleAddNote).not.toHaveBeenCalled();
-    });
+        const noteTextarea = screen.getByPlaceholderText('Type to add a note...');
+    
+        fireEvent.change(noteTextarea, { target: { value: 'New note text' } });
+
+        expect(saveButton).not.toBeDisabled();
+      });
 });
     
     

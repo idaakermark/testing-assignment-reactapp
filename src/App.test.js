@@ -26,16 +26,15 @@ test('Delete a note and check if it is removed', () => {
   expect(newNotesCount).toBe(initialNotesCount - 1);
 });
 
-test('Toggle dark mode', () => {
+test('renders added note text on the page', () => {
   render(<App />);
-  
-  const darkModeToggleButton = screen.getByText('Toggle Mode');
 
-  fireEvent.click(darkModeToggleButton);
+  const addNoteInput = screen.getByPlaceholderText('Type to add a note...');
 
-  expect(document.body.classList.contains('dark-mode')).toBe(false);
+  fireEvent.change(addNoteInput, { target: { value: 'This is a new note for testing' } });
+  fireEvent.click(screen.getByText('Save'));
 
-  fireEvent.click(darkModeToggleButton);
+  const addedNote = screen.getByText('This is a new note for testing');
 
-  expect(document.body.classList.contains('dark-mode')).toBe(false);
+  expect(addedNote).toBeInTheDocument();
 });

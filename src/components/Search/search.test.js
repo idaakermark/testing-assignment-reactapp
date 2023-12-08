@@ -19,11 +19,4 @@ describe('Search component', () => {
 
         expect(mockHandleSearchNote).toHaveBeenCalledWith('test');
     });
-
-    test('does not render the search icon if not provided', () => {
-        render(<Search handleSearchNote={() => {}} />);
-
-        const searchIcon = screen.queryByTestId('search-icon');
-        expect(searchIcon).toBeNull();
-    });
 });

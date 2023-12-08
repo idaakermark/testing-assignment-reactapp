@@ -43,4 +43,11 @@ describe('NoteList component', () => {
         const noteFooter = screen.queryByRole('note-footer');
         expect(noteFooter).toBeNull();
     });
+
+    test('renders note footer when date is provided', () => {
+        render(<Note id={1} text="Test Note" date="2023-01-01" handleDeleteNote={() => {}} />);
+      
+        const noteFooter = screen.getByTestId('note-footer');
+        expect(noteFooter).toBeInTheDocument();
+      });
 });
